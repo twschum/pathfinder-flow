@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 """
 Given a board via the specified JSON-schema, print it to the console
 """
@@ -9,7 +10,6 @@ import sys
 # [x,y,color,type], where 0,0 is top, left
 # and color is numeric code 0 - 4 (for now)
 # and
-
 ''' Hex encoding of node data - 2 bytes each
 * tt blank, sink, pipe - 1 byte
 * cc 32 colors - 1 byte white is 0/blank, colors after that
@@ -65,8 +65,8 @@ class Node(object):
     """
     Node in the board is the abstract base class for Sink and Pipe
     """
-    __shape_ids = ['blank', 'sink', 'pipe']
-    __shapes = {
+    _shape_ids = ['blank', 'sink', 'pipe']
+    _shapes = {
             'blank': ' ',
             'sink': 'o',
             'pipe': '+',
@@ -74,8 +74,8 @@ class Node(object):
             'pipe_horiz': '-',
             }
 
-    __color_ids = ['white', 'blue', 'yellow', 'red', 'green', 'purple']
-    __colors = {
+    _color_ids = ['white', 'blue', 'yellow', 'red', 'green', 'purple']
+    _colors = {
             'white': '\033[0m',
             'blue': '\033[94m',
             'yellow': '\033[93m',
@@ -84,14 +84,6 @@ class Node(object):
             'pruple': '\033[95m',
             }
 
-    hex_val= 0
-    shape = 'blank'
-    shape_id = 0
-    color = 'white'
-    color_id = 0
-    x = -1
-    y = -1
-
     def __init__(self, hex_value):
         self.hex_val = hex_value
         self.shape_id = hex_value >> 24
@@ -99,11 +91,11 @@ class Node(object):
         self.x = (hex_value >> 8) & 0x000000ff
         self.y = hex_value & 0x000000ff
 
-        self.shape = __shape_ids[self.shape_id]
-        self.color = __color_ids[self.color_id]
+        self.shape = self._shape_ids[self.shape_id]
+        self.color = self._color_ids[self.color_id]
 
-    def get_char_repr(self):
-        return __colors[color] + __shapes[shape] + __colors['white']
+    def __str__(self):
+        return self._colors[self.color] + self._shapes[self.shape] + self._colors['white']
 
 
 class Board(object):
@@ -111,22 +103,21 @@ class Board(object):
     A Board has a set size, and an array of Nodes, which are either pipe or sink
     """
 
-    # square dimensions, usually [5,14]
-    board_size = 0
-
-    # array of Nodes
-    nodes = []
-
     def __init__(self, size, node_list):
-        self.size = size
+        self.board_size = size
         self.nodes = [Node(n) for n in node_list]
 
     def __str__(self):
-        print "{} by {} board:".format(board_size, board_size)
-        for i in range(board_size):
-            for j in range(board_size):
-                sys.stdout.write(nodes[(i*board_size) + j].get_char_repr)
-            sys.stdout.write('\n')
+        _str = '{} by {} board:\n'.format(self.board_size, self.board_size)
+        #_str += '+{}+\n'.format('-' * (2*self.board_size -1))
+        for i in range(self.board_size):
+            for j in range(self.board_size):
+                _str += ' ' + str(self.nodes[(i*self.board_size) + j])
+            _str += '\n'
+            #if i < self.board_size - 1:
+               #_str += '+{}\n'.format('-+' * self.board_size)
+        #_str += '+{}+\n'.format('-' * (2*self.board_size -1))
+        return _str
 
 def main():
 
