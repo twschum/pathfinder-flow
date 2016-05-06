@@ -128,6 +128,16 @@ class Board(object):
                 sys.stdout.write(nodes[(i*board_size) + j].get_char_repr)
             sys.stdout.write('\n')
 
+def main():
 
+    one = Board(5, board_one)
+    one_part = Board(5, board_one_partial)
+    one_solved = Board(5, board_one_solved)
 
+    print one
+    print one_part
+    print one_solved
+
+if __name__ == "__main__":
+    main()
 
