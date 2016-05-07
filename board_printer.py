@@ -6,10 +6,6 @@ Given a board via the specified JSON-schema, print it to the console
 import json
 import sys
 
-# board node array notation:
-# [x,y,color,type], where 0,0 is top, left
-# and color is numeric code 0 - 4 (for now)
-# and
 ''' Hex encoding of node data - 2 bytes each
 * tt blank, sink, pipe - 1 byte
 * cc 32 colors - 1 byte white is 0/blank, colors after that
@@ -109,14 +105,10 @@ class Board(object):
 
     def __str__(self):
         _str = '{} by {} board:\n'.format(self.board_size, self.board_size)
-        #_str += '+{}+\n'.format('-' * (2*self.board_size -1))
         for i in range(self.board_size):
             for j in range(self.board_size):
                 _str += ' ' + str(self.nodes[(i*self.board_size) + j])
             _str += '\n'
-            #if i < self.board_size - 1:
-               #_str += '+{}\n'.format('-+' * self.board_size)
-        #_str += '+{}+\n'.format('-' * (2*self.board_size -1))
         return _str
 
 def main():
@@ -128,6 +120,8 @@ def main():
     print one
     print one_part
     print one_solved
+
+    #print json.dumps(blank_board)
 
 if __name__ == "__main__":
     main()
