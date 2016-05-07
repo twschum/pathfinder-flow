@@ -3,6 +3,7 @@ CPP_OBJ_FILES := $(addsuffix .o,$(basename $(CPP_CODE_FILES)))
 H_FILES := $(wildcard *.h)
 TARGET := solver
 COMPILER = clang++
+FLAGS = -g3 -Wall -Werror -Wextra -pedantic -std=c++11
 
 .PHONY: all test run kill
 
@@ -14,10 +15,9 @@ $(TARGET): $(CPP_OBJ_FILES)
 	$(COMPILER) $(CPP_OBJ_FILES) -o $(TARGET)
 
 %.o: %.cpp $(H_FILES)
-	$(COMPILER) $< -g -Wall -Werror -Wextra -pedantic -std=c++11 -c -o $@
+	$(COMPILER) $< $(FLAGS) -c -o $@
 
 clean:
-	./createfs
 	-rm -rf *.o $(TARGET)
 
 kill:

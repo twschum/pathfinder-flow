@@ -2,7 +2,7 @@
  * File Name : path_solve.cpp
  * Author   : Tim Schumacher - twschum
  * Creation Date : 06-05-2016
- * Last Modified : Fri 06 May 2016 10:22:02 PM EDT
+ * Last Modified : Sat 07 May 2016 07:36:03 PM EDT
  * * * * * * * * * * * * * * * * * * * * * * * * */
 
 #include <vector>
@@ -10,6 +10,8 @@
 #include <iostream>
 #include <fstream>
 #include <inttypes.h>
+
+#include "Board.h"
 
 using namespace std;
 
@@ -35,9 +37,9 @@ int main(/*int argc, char** argv*/) {
     // where filename has whitespace seperated, hex
     // encoded numnbers representing the board
     // read from standard in if not provided
+    //
+    // do with streams instead
 
-    vector<uint32_t> raw_board;
-    read_board(raw_board);
-
-
+    Board board_one(cin);
+    board_one.print();
 }
