@@ -2,8 +2,17 @@
  * File Name : path_solve.cpp
  * Author   : Tim Schumacher - twschum
  * Creation Date : 06-05-2016
- * Last Modified : Sat 07 May 2016 07:36:03 PM EDT
+ * Last Modified : Sat 07 May 2016 08:10:32 PM EDT
  * * * * * * * * * * * * * * * * * * * * * * * * */
+
+/*
+ * Solving Constraints:
+ * * Every Pipe has EXACTLY TWO adjacent squares of the same color
+ * * Every Sink has EXACTLY ONE adjacent square of the same color
+ *
+ * Observations:
+ * * Edge sinks tend to go around the edges
+ */
 
 #include <vector>
 #include <string>

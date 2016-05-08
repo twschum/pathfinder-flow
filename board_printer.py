@@ -33,8 +33,7 @@ board_one = [
             0x00000004, 0x00000104, 0x00000204, 0x00000304, 0x01010404
             ]
 
-board_one_partial = [
-            0x00000000, 0x00000100, 0x01010200, 0x02020300, 0x01020400,
+board_one_partial = [ 0x00000000, 0x00000100, 0x01010200, 0x02020300, 0x01020400,
             0x00000001, 0x01020101, 0x02020201, 0x02020301, 0x01040401,
             0x00000002, 0x01030102, 0x02030202, 0x01030302, 0x00000402,
             0x00000003, 0x01040103, 0x00000203, 0x00000303, 0x00000403,
@@ -117,11 +116,13 @@ def main():
     one_part = Board(5, board_one_partial)
     one_solved = Board(5, board_one_solved)
 
-    print one
-    print one_part
-    print one_solved
+    #print one
+    #print one_part
+    #print one_solved
 
-    #print json.dumps(blank_board)
+    print '5'
+    for node in board_one:
+        print node
 
 if __name__ == "__main__":
     main()
